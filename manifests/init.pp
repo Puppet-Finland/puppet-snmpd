@@ -23,7 +23,7 @@
 # [*max_load*]
 #   Maximum 1, 5 and 15-minute load averages. Passed directly to snmpd.conf 
 #   "load" option as a parameter.
-# [*email*]
+# [*monitor_email*]
 #   Server monitoring email. Defaults to $::servermonitor.
 #
 # == Examples
@@ -53,7 +53,7 @@ class snmpd (
     $allow_netmask_ipv6='128',
     $min_diskspace='300000',
     $max_load='12 10 5',
-    $email = $::servermonitor
+    $monitor_email = $::servermonitor
 )
 {
 
