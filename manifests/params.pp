@@ -4,21 +4,25 @@
 # Defines some variables based on the operating system
 #
 class snmpd::params {
-    $package_name = $::operatingsystem ? {
-        /(Debian|Ubuntu)/ => 'snmpd',
-        /(CentOS)/        => ['net-snmp-utils','net-snmp'],
-        default => 'snmpd',
-    }
 
-    $config_name = $::operatinsystem ? {
-        /(Debian|Ubuntu)/ => '/etc/snmp/snmpd.conf',
-        /(CentOS)/ => '/etc/snmpd/snmpd.conf',
-        default => '/etc/snmp/snmpd.conf',
-    }
- 
-    $service_name = $::operatingsystem ? {
-        /(Debian|Ubuntu)/ => 'snmpd',
-        /(CentOS)/        => 'snmpd',
-        default => 'snmpd',
+    case $::osfamily {
+        'RedHat': {
+            $package_name = ['net-snmp-utils','net-snmp']
+            $config_name = '/etc/snmpd/snmpd.conf'
+            $service_name = 'snmpd'
+            $service_command = "/sbin/service $service_name"            
+        }
+        'Debian': {
+            $package_name = 'snmpd'
+            $config_name = '/etc/snmp/snmpd.conf'
+            $service_name = 'snmpd'
+            $service_command = "/usr/sbin/service $service_name" 
+        }
+        default: {
+            $package_name = 'snmpd'
+            $config_name = '/etc/snmp/snmpd.conf'
+            $service_name = 'snmpd'
+            $service_command = "/usr/sbin/service $service_name" 
+        }
     }
 }

@@ -81,4 +81,10 @@ class snmpd (
             allow_netmask_ipv6 => $allow_netmask_ipv6,
         }
     }
+
+    if tagged('monit') {
+        class { 'snmpd::monit':
+            monitor_email => $monitor_email,
+        }
+    }
 }
