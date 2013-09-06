@@ -7,7 +7,7 @@ class snmpd::install {
     include snmpd::params
 
     package { 'snmpd':
-        name => $snmpd::params::package_name,
+        name => "${::snmpd::params::package_name}",
         ensure => installed,
     }
 }

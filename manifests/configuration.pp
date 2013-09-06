@@ -16,11 +16,11 @@ define snmpd::configuration(
 {
 
     file { "$title":
-        name => $snmpd::params::config_name,
+        name => "${::snmpd::params::config_name}",
         content => template('snmpd/snmpd.conf.erb'),
         ensure => present,
         owner => root,
-        group => root,
+        group => "${::snmpd::params::admingroup}",
         mode => 755,
         require => Class['snmpd::install'],
         notify => Class['snmpd::service'],

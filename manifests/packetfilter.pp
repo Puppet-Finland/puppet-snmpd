@@ -3,7 +3,8 @@
 # This class configures packetfilter to only let in traffic from specified 
 # IP-addresses to the snmpd daemon
 #
-class snmpd::packetfilter(
+class snmpd::packetfilter
+(
     $iface,
     $allow_address_ipv4,
     $allow_netmask_ipv4,

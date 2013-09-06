@@ -7,7 +7,7 @@ class snmpd::service {
     include snmpd::params
 
     service { 'snmpd':
-        name => $snmpd::params::service_name,
+        name => "${::snmpd::params::service_name}",
         enable => true,
         require => Class['snmpd::install'],
     }

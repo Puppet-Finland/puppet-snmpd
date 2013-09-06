@@ -5,18 +5,23 @@
 # == Parameters
 #
 # [*iface*]
-#   The interface from which to allow connections. Only affects packet filtering
-#   rules.
+#   The interface from which to allow connections. Only affects packet filtering 
+#   rules. Defaults to 'eth0' and can be omitted if packet filtering is not 
+#   handled by snmpd::packetfilter class.
 # [*community*]
 #   The community string to use (essentially a shared password).
 # [*allow_address_ipv4*]
-#   IPv4 address from where to allow connections. Address part only.
+#   IPv4 address from where to allow connections. Only affects packet filtering 
+#   rules. Address part only.
 # [*allow_netmask_ipv4*]
-#   IPv4 network from where to allow connections. Netmask part only
+#   IPv4 network from where to allow connections. Only affects packet filtering 
+#   rules. Netmask part only,.
 # [*allow_address_ipv6*]
-#   IPv6 address from where to allow connections. Address part only.
+#   IPv6 address from where to allow connections. Only affects packet filtering 
+#   rules. Address part only.
 # [*allow_netmask_ipv6*]
-#   IPv6 network from where to allow connections. Netmask part only
+#   IPv6 network from where to allow connections. Only affects packet filtering 
+#   rules. Netmask part only.
 # [*min_diskspace*]
 #   Minimum amount of diskspace. Passed directly to snmpd.conf "includeAllDisks" 
 #   option as a parameter.
@@ -38,6 +43,7 @@
 # == Authors
 #
 # Samuli Seppänen <samuli.seppanen@gmail.com>
+# Samuli Seppänen <samuli@openvpn.net>
 #
 # == License
 #
@@ -68,6 +74,10 @@ class snmpd (
         min_diskspace => $min_diskspace,
         max_load => $max_load,
         email => $email,
+    }
+
+    if $::operatingsystem == 'FreeBSD' {
+        include snmpd::config::freebsd
     }
 
     include snmpd::service
