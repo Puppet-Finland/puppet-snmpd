@@ -62,7 +62,7 @@ class snmpd (
 {
 
 # Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_snmpd') != 'false' {
+if hiera('manage_snmpd', 'true') != 'false' {
 
     include snmpd::install
 
