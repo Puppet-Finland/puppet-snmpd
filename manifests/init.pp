@@ -61,6 +61,9 @@ class snmpd (
 )
 {
 
+# Rationale for this is explained in init.pp of the sshd module
+if hiera('manage_snmpd') != 'false' {
+
     include snmpd::install
 
     snmpd::configuration { "$title":
@@ -95,4 +98,5 @@ class snmpd (
             monitor_email => $monitor_email,
         }
     }
+}
 }
