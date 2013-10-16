@@ -66,7 +66,7 @@ if hiera('manage_snmpd', 'true') != 'false' {
 
     include snmpd::install
 
-    snmpd::configuration { "$title":
+    class { 'snmpd::config':
         community => $community,
         allow_address_ipv4 => $allow_address_ipv4,
         allow_netmask_ipv4 => $allow_netmask_ipv4,

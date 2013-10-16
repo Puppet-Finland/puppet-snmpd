@@ -1,9 +1,10 @@
 #
-# Define: snmpd::configuration
+# Class: snmpd::configuration
 #
 # Setup snmpd.conf
 #
-define snmpd::configuration(
+class snmpd::config
+(
     $community,
     $allow_address_ipv4,
     $allow_netmask_ipv4,
@@ -15,7 +16,7 @@ define snmpd::configuration(
 )
 {
 
-    file { "$title":
+    file { 'snmpd-snmpd.conf':
         name => "${::snmpd::params::config_name}",
         content => template('snmpd/snmpd.conf.erb'),
         ensure => present,
