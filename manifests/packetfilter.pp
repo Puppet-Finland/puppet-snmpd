@@ -13,12 +13,23 @@ class snmpd::packetfilter
 )
 {
 
-    # Allow reading snmp data only from specified IP/network
-    packetfilter::accept::traffic_from_ip_to_port { "$title":
-        iface => $iface,
-        ipv4_address => "$allow_address_ipv4/$allow_netmask_ipv4",
-        ipv6_address => "$allow_address_ipv6/$allow_netmask_ipv6",
-        dport => '161',
+    firewall { "007 ipv4 accept snmp":
+        provider => 'iptables',
+        chain => 'INPUT',
         proto => 'udp',
+        action => 'accept',
+        source => "$allow_address_ipv4/$allow_netmask_ipv4",
+        dport => '161',
+        iniface => "$iface",
+    }
+
+    firewall { "007 ipv6 accept snmp":
+        provider => 'ip6tables',
+        chain => 'INPUT',
+        proto => 'udp',
+        action => 'accept',
+        source => "$allow_address_ipv6/$allow_netmask_ipv6",
+        dport => '161',
+        iniface => "$iface",
     }
 }
