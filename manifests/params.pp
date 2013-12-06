@@ -12,7 +12,6 @@ class snmpd::params {
             $service_name = 'snmpd'
             $service_command = "/sbin/service $service_name"            
             $pidfile = '/var/run/snmpd.pid'
-            $admingroup = 'root'
         }
         'Debian': {
             $package_name = 'snmpd'
@@ -20,7 +19,6 @@ class snmpd::params {
             $service_name = 'snmpd'
             $service_command = "/usr/sbin/service $service_name" 
             $pidfile = '/var/run/snmpd.pid'
-            $admingroup = 'root'
         }
         'FreeBSD': {
             $package_name = 'net-snmp'            
@@ -28,7 +26,6 @@ class snmpd::params {
             $service_name = 'snmpd'
             $service_command = "/usr/local/etc/rc.d/$service_name" 
             $pidfile = '/var/run/net_snmpd.pid'
-            $admingroup = 'wheel'
         }
         default: {
             $package_name = 'snmpd'
@@ -36,7 +33,6 @@ class snmpd::params {
             $service_name = 'snmpd'
             $service_command = "/usr/sbin/service $service_name" 
             $pidfile = '/var/run/snmpd.pid'
-            $admingroup = 'root'
         }
     }
 }

@@ -16,12 +16,14 @@ class snmpd::config
 )
 {
 
+    include os::params
+
     file { 'snmpd-snmpd.conf':
         name => "${::snmpd::params::config_name}",
         content => template('snmpd/snmpd.conf.erb'),
         ensure => present,
         owner => root,
-        group => "${::snmpd::params::admingroup}",
+        group => "${::os::params::admingroup}",
         mode => 755,
         require => Class['snmpd::install'],
         notify => Class['snmpd::service'],
