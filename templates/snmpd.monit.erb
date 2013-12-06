@@ -1,6 +1,6 @@
 ### THIS FILE IS MANAGED BY PUPPET. ANY MANUAL CHANGES WILL GET OVERWRITTEN.
 
 check process snmpd with pidfile <%= scope.lookupvar('snmpd::params::pidfile') %>
-   start program = "<%= scope.lookupvar('snmpd::params::service_command') %> start"
-   stop  program = "<%= scope.lookupvar('snmpd::params::service_command') %> stop"
+   start program = "<%= scope.lookupvar('snmpd::params::service_start') %>"
+   stop  program = "<%= scope.lookupvar('snmpd::params::service_stop') %>"
    alert <%= scope.lookupvar('snmpd::monit::monitor_email') %> with reminder on 480 cycles
