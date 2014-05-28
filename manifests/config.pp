@@ -17,6 +17,7 @@ class snmpd::config
 {
 
     include os::params
+    include snmpd::params
 
     file { 'snmpd-snmpd.conf':
         name => "${::snmpd::params::config_name}",
