@@ -31,22 +31,22 @@
 #
 # == Examples
 #
-# class { 'snmpd':
-#   community => 'mysecretpassword',
-#   iface => 'eth0',
-#   allow_network => '10.10.90.1',
-#   allow_netmask => '32',
-#  }
+#   class { 'snmpd':
+#       community => 'mysecretpassword',
+#       iface => 'eth0',
+#       allow_network => '10.10.90.1',
+#       allow_netmask => '32',
+#   }
 #
 # == Authors
 #
 # Samuli Seppänen <samuli.seppanen@gmail.com>
+#
 # Samuli Seppänen <samuli@openvpn.net>
 #
 # == License
 #
-# BSD-lisence
-# See file LICENSE for details
+# BSD-license. See file LICENSE for details.
 #
 class snmpd (
     $iface = 'eth0',
