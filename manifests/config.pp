@@ -13,11 +13,11 @@ class snmpd::config
     $min_diskspace,
     $max_load,
     $email
-)
+
+) inherits snmpd::params
 {
 
     include os::params
-    include snmpd::params
 
     file { 'snmpd-snmpd.conf':
         name => "${::snmpd::params::config_name}",

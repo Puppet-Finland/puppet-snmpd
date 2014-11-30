@@ -37,13 +37,7 @@ class snmpd::params {
             $service_stop = "/usr/local/etc/rc.d/$service_name stop"
         }
         default: {
-            $package_name = 'snmpd'
-            $config_name = '/etc/snmp/snmpd.conf'
-            $service_name = 'snmpd'
-            $service_command = "/usr/sbin/service $service_name" 
-            $pidfile = '/var/run/snmpd.pid'
-            $service_start = "/usr/sbin/service $service_name start"
-            $service_stop = "/usr/sbin/service $service_name stop"
+            fail("Unsupported OS: ${::osfamily}")
         }
     }
 }

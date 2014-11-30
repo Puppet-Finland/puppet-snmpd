@@ -2,9 +2,7 @@
 #
 # This class installs the snmpd daemon
 #
-class snmpd::install {
-
-    include snmpd::params
+class snmpd::install inherits snmpd::params {
 
     package { $::snmpd::params::package_name:
         ensure => installed,

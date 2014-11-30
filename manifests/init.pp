@@ -58,7 +58,8 @@ class snmpd (
     $min_diskspace='300000',
     $max_load='12 10 5',
     $monitor_email = $::servermonitor
-)
+
+) inherits snmpd::params
 {
 
 # Rationale for this is explained in init.pp of the sshd module

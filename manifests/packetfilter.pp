@@ -10,7 +10,8 @@ class snmpd::packetfilter
     $allow_netmask_ipv4,
     $allow_address_ipv6,
     $allow_netmask_ipv6
-)
+
+) inherits snmpd::params
 {
 
     firewall { "007 ipv4 accept snmp":

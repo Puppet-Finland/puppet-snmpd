@@ -6,7 +6,8 @@
 class snmpd::monit
 (
     $monitor_email
-)
+
+) inherits snmpd::params
 {
     monit::fragment { 'snmpd-snmpd.monit':
         modulename => 'snmpd',

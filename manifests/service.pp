@@ -2,9 +2,7 @@
 #
 # This class configures the snmpd service
 #
-class snmpd::service {
-
-    include snmpd::params
+class snmpd::service inherits snmpd::params {
 
     service { 'snmpd':
         name => "${::snmpd::params::service_name}",
