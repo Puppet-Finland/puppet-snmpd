@@ -8,7 +8,7 @@ class snmpd::params {
     case $::osfamily {
         'RedHat': {
             $package_name = ['net-snmp-utils','net-snmp']
-            $config_name = '/etc/snmpd/snmpd.conf'
+            $config_name = '/etc/snmp/snmpd.conf'
             $service_name = 'snmpd'
             $pidfile = '/var/run/snmpd.pid'
 
