@@ -48,7 +48,8 @@
 #
 # BSD-license. See file LICENSE for details.
 #
-class snmpd (
+class snmpd
+(
     $iface = 'eth0',
     $community='public',
     $allow_address_ipv4='127.0.0.1',
