@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "author": "Puppet-Finland team",
   "license": "BSD license",
-  "summary": "Setup snmpd"
+  "summary": "Setup snmpd",
   "source": "https://github.com/Puppet-Finland/snmpd.git",
   "project_page": "https://github.com/Puppet-Finland/snmpd",
   "dependencies": [
