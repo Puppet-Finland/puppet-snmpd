@@ -9,7 +9,12 @@
 #   filtering rules. Defaults to 'eth0' and can be omitted if packet filtering 
 #   is not handled by snmpd::packetfilter class.
 # [*community*]
-#   The community string to use (essentially a shared password).
+#   The community string to use (essentially a shared password). Leave empty if 
+#   you want to disable snmpv2.
+# [*users*]
+#   A hash of snmpd::user resources. Leave empty to disable snmpv3 users 
+#   altogether, or to manage them directly using snmpd::user or outside this 
+#   class. By default no users are created.
 # [*allow_address_ipv4*]
 #   IPv4 address from where to allow connections. Affects both packet filtering 
 #   rules and snmpd's internal filters. Address part only.
@@ -51,7 +56,8 @@
 class snmpd
 (
     $iface = 'eth0',
-    $community='public',
+    $community='',
+    $users = {},
     $allow_address_ipv4='127.0.0.1',
     $allow_netmask_ipv4='32',
     $allow_address_ipv6='::1',
@@ -82,6 +88,8 @@ if hiera('manage_snmpd', 'true') != 'false' {
     if $::operatingsystem == 'FreeBSD' {
         include snmpd::config::freebsd
     }
+
+    create_resources('snmpd::user', $users)
 
     include snmpd::service
 

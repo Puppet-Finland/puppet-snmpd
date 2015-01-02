@@ -58,12 +58,12 @@ view   systemonly  included   .1.3.6.1.2.1.25.1
                                                  #     settings, change the community string,
                                                  #     and check the 'agentAddress' setting above
 
-rocommunity <%= community %> localhost
-rocommunity <%= community %> <%= allow_address_ipv4 %>/<%= allow_netmask_ipv4 %>
-rocommunity6 <%= community %> <%= allow_address_ipv6 %>/<%= allow_netmask_ipv6 %>
+<%= rocommunity_line_localhost %>
+<%= rocommunity_line_ipv4 %>
+<%= rocommunity_line_ipv6 %>
 
                                                  #  Full read-only access for SNMPv3
-rouser   authOnlyUser
+#rouser   authOnlyUser
                                                  #  Full write access for encrypted requests
                                                  #     Remember to activate the 'createUser' lines above
 #rwuser   authPrivUser   priv
