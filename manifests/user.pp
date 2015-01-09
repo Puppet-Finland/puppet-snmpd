@@ -47,7 +47,7 @@ define snmpd::user
     # net-snmp-config because it cannot force encryption on users (e.g. rouser 
     # john priv).
     exec { "snmpd-create-user-$title":
-        command => "${::snmpd::params::service_stop}; echo \"$createuser_line\" >> ${::snmpd::params::vardir}/snmpd.conf; ${::snmpd::params::service_start}",
+        command => "${::snmpd::params::service_stop}; sleep 3; echo \"$createuser_line\" >> ${::snmpd::params::vardir}/snmpd.conf; ${::snmpd::params::service_start}",
         unless => "${unless_cmd}",
         user => root,
         path => ['/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin'],
