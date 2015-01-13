@@ -32,7 +32,8 @@
 #   Maximum 1, 5 and 15-minute load averages. Passed directly to snmpd.conf 
 #   "load" option as a parameter.
 # [*monitor_email*]
-#   Server monitoring email. Defaults to $::servermonitor.
+#   Server monitoring email. Also doubles as sysContact. Defaults to
+#   $::servermonitor.
 #
 # == Examples
 #
@@ -82,7 +83,7 @@ if hiera('manage_snmpd', 'true') != 'false' {
         allow_netmask_ipv6 => $allow_netmask_ipv6,
         min_diskspace => $min_diskspace,
         max_load => $max_load,
-        email => $email,
+        email => $monitor_email,
     }
 
     if $::operatingsystem == 'FreeBSD' {
