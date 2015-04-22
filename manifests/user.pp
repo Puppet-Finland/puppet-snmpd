@@ -31,7 +31,7 @@ define snmpd::user
     $rw = 'no'
 )
 {
-    include snmpd::params
+    include ::snmpd::params
 
     $createuser_line = "createuser ${title} SHA ${pass} AES ${pass}"
 
@@ -46,20 +46,20 @@ define snmpd::user
     # Add the user to snmpd's user database. This cannot be done using 
     # net-snmp-config because it cannot force encryption on users (e.g. rouser 
     # john priv).
-    exec { "snmpd-create-user-$title":
-        command => "${::snmpd::params::service_stop}; sleep 3; echo \"$createuser_line\" >> ${::snmpd::params::vardir}/snmpd.conf; ${::snmpd::params::service_start}",
-        unless => "${unless_cmd}",
-        user => root,
-        path => ['/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin'],
+    exec { "snmpd-create-user-${title}":
+        command => "${::snmpd::params::service_stop}; sleep 3; echo \"${createuser_line}\" >> ${::snmpd::params::vardir}/snmpd.conf; ${::snmpd::params::service_start}",
+        unless  => $unless_cmd,
+        user    => root,
+        path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin'],
         require => Class['snmpd::config'],
     }
 
     # Ensure the user is authorized to view the MIB
-    file_line { "snmpd-auth_line-$title":
-        ensure => present,
-        path => "${::snmpd::params::dist_config_name}",
-        line => "${auth_line}",
-        require => [ Exec["snmpd-create-user-$title"], Class['snmpd::config'] ],
-        notify => Class['snmpd::service'],
+    file_line { "snmpd-auth_line-${title}":
+        ensure  => present,
+        path    => $::snmpd::params::dist_config_name,
+        line    => $auth_line,
+        require => [ Exec["snmpd-create-user-${title}"], Class['snmpd::config'] ],
+        notify  => Class['snmpd::service'],
     }
 }

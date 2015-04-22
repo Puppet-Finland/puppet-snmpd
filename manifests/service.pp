@@ -5,8 +5,8 @@
 class snmpd::service inherits snmpd::params {
 
     service { 'snmpd':
-        name => "${::snmpd::params::service_name}",
-        enable => true,
+        name    => $::snmpd::params::service_name,
+        enable  => true,
         require => Class['snmpd::install'],
     }
 }

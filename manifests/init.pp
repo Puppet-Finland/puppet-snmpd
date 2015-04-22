@@ -4,6 +4,9 @@
 #
 # == Parameters
 #
+# [*manage*]
+#   Whether to manage snmpd with Puppet or not. Valid values are 'yes' (default) 
+#   and 'no'.
 # [*iface*]
 #   The interface from which to allow connections. Currently only affects packet 
 #   filtering rules. Defaults to 'eth0' and can be omitted if packet filtering 
@@ -56,8 +59,9 @@
 #
 class snmpd
 (
+    $manage = 'yes',
     $iface = 'eth0',
-    $community='',
+    $community=undef,
     $users = {},
     $allow_address_ipv4='127.0.0.1',
     $allow_netmask_ipv4='32',
@@ -70,33 +74,32 @@ class snmpd
 ) inherits snmpd::params
 {
 
-# Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_snmpd', 'true') != 'false' {
+if $manage == 'yes' {
 
-    include snmpd::install
+    include ::snmpd::install
 
-    class { 'snmpd::config':
-        community => $community,
+    class { '::snmpd::config':
+        community          => $community,
         allow_address_ipv4 => $allow_address_ipv4,
         allow_netmask_ipv4 => $allow_netmask_ipv4,
         allow_address_ipv6 => $allow_address_ipv6,
         allow_netmask_ipv6 => $allow_netmask_ipv6,
-        min_diskspace => $min_diskspace,
-        max_load => $max_load,
-        email => $monitor_email,
+        min_diskspace      => $min_diskspace,
+        max_load           => $max_load,
+        email              => $monitor_email,
     }
 
     if $::operatingsystem == 'FreeBSD' {
-        include snmpd::config::freebsd
+        include ::snmpd::config::freebsd
     }
 
     create_resources('snmpd::user', $users)
 
-    include snmpd::service
+    include ::snmpd::service
 
     if tagged('packetfilter') {
-        class { 'snmpd::packetfilter':
-            iface => $iface,
+        class { '::snmpd::packetfilter':
+            iface              => $iface,
             allow_address_ipv4 => $allow_address_ipv4,
             allow_netmask_ipv4 => $allow_netmask_ipv4,
             allow_address_ipv6 => $allow_address_ipv6,
@@ -105,7 +108,7 @@ if hiera('manage_snmpd', 'true') != 'false' {
     }
 
     if tagged('monit') {
-        class { 'snmpd::monit':
+        class { '::snmpd::monit':
             monitor_email => $monitor_email,
         }
     }
