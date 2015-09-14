@@ -83,8 +83,8 @@ view   systemonly  included   .1.3.6.1.2.1.25.1
 
 #  Note that setting these values here, results in the corresponding MIB objects being 'read-only'
 #  See snmpd.conf(5) for more details
-sysLocation    <%= hostname %>
-sysContact     <%= email %>
+sysLocation    <%= @hostname %>
+sysContact     <%= @email %>
                                                  # Application + End-to-End layers
 sysServices    72
 
@@ -111,7 +111,7 @@ sysServices    72
 
 #disk       /     10000
 #disk       /var  5%
-includeAllDisks  <%= min_diskspace %>
+includeAllDisks  <%= @min_diskspace %>
 
 #  Walk the UCD-SNMP-MIB::dskTable to see the resulting output
 #  Note that this table will be empty if there are no "disk" entries in the snmpd.conf file
@@ -122,7 +122,7 @@ includeAllDisks  <%= min_diskspace %>
 #
                                # Unacceptable 1-, 5-, and 15-minute load averages
 #load   12 10 5
-load    <%= max_load %>
+load    <%= @max_load %>
 
 #  Walk the UCD-SNMP-MIB::laTable to see the resulting output
 #  Note that this table *will* be populated, even without a "load" entry in the snmpd.conf file
