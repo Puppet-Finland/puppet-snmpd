@@ -38,15 +38,6 @@
 #   Server monitoring email. Also doubles as sysContact. Defaults to
 #   $::servermonitor.
 #
-# == Examples
-#
-#   class { 'snmpd':
-#       community => 'mysecretpassword',
-#       iface => 'eth0',
-#       allow_network => '10.10.90.1',
-#       allow_netmask => '32',
-#   }
-#
 # == Authors
 #
 # Samuli Seppänen <samuli.seppanen@gmail.com>

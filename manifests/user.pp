@@ -7,15 +7,6 @@
 # user. The assumption is that only authenticated snmpv3 users will be allowed 
 # to access the information from snmpd.
 #
-# To test if the user is working correctly use something like this:
-#
-#   snmpwalk -v 3 -n "" -u <user> -a SHA -A "<pass>" -x AES -X "<pass>"
-#     -l authPriv localhost
-#
-# To ensure that snmpv2 is disabled use something like this:
-#
-#   snmpwalk -c <pass> -v2c localhost
-#
 # = Parameters
 #
 # [*title*]
