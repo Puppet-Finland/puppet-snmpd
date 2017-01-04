@@ -25,12 +25,12 @@ Snmpv3 setup:
 
 Testing if a snmpv3 user is working correctly:
 
-   snmpwalk -v 3 -n "" -u <user> -a SHA -A "<pass>" -x AES -X "<pass>"
+    snmpwalk -v 3 -n "" -u <user> -a SHA -A "<pass>" -x AES -X "<pass>"
      -l authPriv localhost
 
 Ensuring that snmpv2 is disabled:
 
-   snmpwalk -c <pass> -v2c localhost
+    snmpwalk -c <pass> -v2c localhost
 
 For more details refer here:
 
