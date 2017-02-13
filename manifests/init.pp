@@ -5,8 +5,8 @@
 # == Parameters
 #
 # [*manage*]
-#   Whether to manage snmpd with Puppet or not. Valid values are 'yes' (default) 
-#   and 'no'.
+#   Whether to manage snmpd with Puppet or not. Valid values are true (default) 
+#   and false.
 # [*iface*]
 #   The interface from which to allow connections. Currently only affects packet 
 #   filtering rules. Defaults to 'eth0' and can be omitted if packet filtering 
@@ -50,22 +50,22 @@
 #
 class snmpd
 (
-    $manage = 'yes',
-    $iface = 'eth0',
-    $community=undef,
-    $users = {},
-    $allow_address_ipv4='127.0.0.1',
-    $allow_netmask_ipv4='32',
-    $allow_address_ipv6='::1',
-    $allow_netmask_ipv6='128',
-    $min_diskspace='300000',
-    $max_load='12 10 5',
-    $monitor_email = $::servermonitor
+    Boolean         $manage = true,
+                    $iface = 'eth0',
+                    $community=undef,
+    Optional[Hash]  $users = {},
+                    $allow_address_ipv4='127.0.0.1',
+                    $allow_netmask_ipv4='32',
+                    $allow_address_ipv6='::1',
+                    $allow_netmask_ipv6='128',
+                    $min_diskspace='300000',
+                    $max_load='12 10 5',
+                    $monitor_email = $::servermonitor
 
 ) inherits snmpd::params
 {
 
-if $manage == 'yes' {
+if $manage {
 
     include ::snmpd::install
 
