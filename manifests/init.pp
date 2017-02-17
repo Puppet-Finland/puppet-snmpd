@@ -7,6 +7,10 @@
 # [*manage*]
 #   Whether to manage snmpd with Puppet or not. Valid values are true (default) 
 #   and false.
+# [*manage_packetfilter*]
+#   Manage packetfilter rules. Valid values are true and false (default).
+# [*manage_monit*]
+#   Manage monit rules. Valid values are true and false (default).
 # [*iface*]
 #   The interface from which to allow connections. Currently only affects packet 
 #   filtering rules. Defaults to 'eth0' and can be omitted if packet filtering 
@@ -51,6 +55,8 @@
 class snmpd
 (
     Boolean         $manage = true,
+    Boolean         $manage_packetfilter = false,
+    Boolean         $manage_monit = false,
                     $iface = 'eth0',
                     $community=undef,
     Optional[Hash]  $users = {},
@@ -88,7 +94,7 @@ if $manage {
 
     include ::snmpd::service
 
-    if tagged('packetfilter') {
+    if $manage_packetfilter {
         class { '::snmpd::packetfilter':
             iface              => $iface,
             allow_address_ipv4 => $allow_address_ipv4,
@@ -98,7 +104,7 @@ if $manage {
         }
     }
 
-    if tagged('monit') {
+    if $manage_monit {
         class { '::snmpd::monit':
             monitor_email => $monitor_email,
         }
