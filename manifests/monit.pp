@@ -9,8 +9,9 @@ class snmpd::monit
 
 ) inherits snmpd::params
 {
-    monit::fragment { 'snmpd-snmpd.monit':
+    @monit::fragment { 'snmpd-snmpd.monit':
         basename   => 'snmpd',
         modulename => 'snmpd',
+        tag        => 'default',
     }
 }

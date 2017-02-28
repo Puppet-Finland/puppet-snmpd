@@ -14,7 +14,7 @@ class snmpd::packetfilter
 ) inherits snmpd::params
 {
 
-    firewall { '007 ipv4 accept snmp':
+    @firewall { '007 ipv4 accept snmp':
         provider => 'iptables',
         chain    => 'INPUT',
         proto    => 'udp',
@@ -22,9 +22,10 @@ class snmpd::packetfilter
         source   => "${allow_address_ipv4}/${allow_netmask_ipv4}",
         dport    => 161,
         iniface  => $iface,
+        tag      => 'default',
     }
 
-    firewall { '007 ipv6 accept snmp':
+    @firewall { '007 ipv6 accept snmp':
         provider => 'ip6tables',
         chain    => 'INPUT',
         proto    => 'udp',
@@ -32,5 +33,6 @@ class snmpd::packetfilter
         source   => "${allow_address_ipv6}/${allow_netmask_ipv6}",
         dport    => 161,
         iniface  => $iface,
+        tag      => 'default',
     }
 }
