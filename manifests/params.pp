@@ -14,8 +14,6 @@ class snmpd::params {
             $dist_config_name = '/usr/share/snmp/snmpd.conf'
             $service_name = 'snmpd'
             $pidfile = '/var/run/snmpd.pid'
-            $service_start = "/sbin/service ${service_name} start"
-            $service_stop = "/sbin/service ${service_name} stop"
             $vardir = '/var/lib/net-snmp'
 
         }
@@ -25,8 +23,6 @@ class snmpd::params {
             $dist_config_name = '/usr/share/snmp/snmpd.conf'
             $service_name = 'snmpd'
             $pidfile = '/var/run/snmpd.pid'
-            $service_start = "/usr/sbin/service ${service_name} start"
-            $service_stop = "/usr/sbin/service ${service_name} stop"
             $vardir = '/var/lib/snmp'
         }
         'FreeBSD': {
@@ -35,12 +31,18 @@ class snmpd::params {
             $dist_config_name = '/usr/local/share/snmp/snmpd.conf'
             $service_name = 'snmpd'
             $pidfile = '/var/run/net_snmpd.pid'
-            $service_start = "/usr/local/etc/rc.d/${service_name} start"
-            $service_stop = "/usr/local/etc/rc.d/${service_name} stop"
             $vardir = '/var/net-snmp'
         }
         default: {
             fail("Unsupported OS: ${::osfamily}")
         }
+    }
+
+    if str2bool($::has_systemd) {
+        $service_start = "${::os::params::systemctl} start ${service_name}"
+        $service_stop = "${::os::params::systemctl} stop ${service_name}"
+    } else {
+        $service_start = "${::os::params::service_cmd} ${service_name} start"
+        $service_stop = "${::os::params::service_cmd} ${service_name} stop"
     }
 }
