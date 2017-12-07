@@ -9,4 +9,8 @@ class snmpd::service inherits snmpd::params {
         enable  => true,
         require => Class['snmpd::install'],
     }
+
+    if $::osfamily == 'RedHat' {
+        include ::snmpd::service::redhat
+    }
 }
