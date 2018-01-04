@@ -50,4 +50,8 @@ class snmpd::config
         mode    => '0644',
         require => Class['snmpd::install'],
     }
+
+    if $facts['os']['distro']['codename'] == 'stretch' {
+        include ::snmpd::config::stretch
+    }
 }
