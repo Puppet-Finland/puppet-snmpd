@@ -51,7 +51,11 @@ class snmpd::config
         require => Class['snmpd::install'],
     }
 
-    if $facts['os']['distro']['codename'] == 'stretch' {
-        include ::snmpd::config::stretch
+    # Check for Debian first: the codename check will cause an error on RedHat
+    # derivatives.
+    if $facts['os']['family'] == 'Debian' {
+        if $facts['os']['distro']['codename'] == 'stretch' {
+            include ::snmpd::config::stretch
+        }
     }
 }
