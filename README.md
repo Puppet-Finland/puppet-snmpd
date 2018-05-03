@@ -1,27 +1,32 @@
 # snmpd
 
-A snmpd module for Puppet
+Puppet module for configuring snmpd. Includes monit and iptables/ip6tables support.
 
 # Module usage
 
 Snmpv2 setup with IP limits:
 
-    classes:
-        - snmpd
-    
-    snmpd::community: 'community'
-    snmpd::iface: 'eth0'
-    snmpd::allow_network: '10.10.90.1'
-    snmpd::allow_netmask: '32'
+    class { '::snmpd':
+      community     => 'community',
+      iface         => 'eth0',
+      allow_network => '10.10.90.1',
+      allow_netmask => '32',
+    }
 
-Snmpv3 setup:
+Setup snmpv3 and one user:
 
-    classes:
-        - snmpd
+    include ::snmpd
     
-    snmpd::users:
-        nmsuser:
-            pass: 'mysecretpassword'
+    ::snmpd::user { 'nmsuser':
+      pass => 'mysecretpassword',
+    }
+
+For more details refer here:
+
+* [Class: snmpd](manifests/init.pp)
+* [Define: snmpd::user](manifests/user.pp)
+
+# Testing tips
 
 Testing if a snmpv3 user is working correctly:
 
@@ -32,25 +37,3 @@ Ensuring that snmpv2 is disabled:
 
     snmpwalk -c <pass> -v2c localhost
 
-For more details refer here:
-
-* [Class: snmpd](manifests/init.pp)
-* [Define: snmpd::user](manifests/user.pp)
-
-# Dependencies
-
-See [metadata.json](metadata.json).
-
-# Operating system support
-
-This module has been tested on
-
-* Ubuntu 12.04, 14.04
-* Debian 7
-* CentOS 6
-* FreeBSD 9 and 10
-
-All UNIXy operating systems should work out of the box or with small 
-modifications.
-
-For details see [params.pp](manifests/params.pp).
