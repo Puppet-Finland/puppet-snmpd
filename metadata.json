@@ -1,6 +1,6 @@
 {
   "name": "puppetfinland-snmpd",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "Puppet-Finland team",
   "summary": "Setup snmpd",
   "license": "BSD-2-Clause",
@@ -53,7 +53,7 @@
         "16.04"
       ]
     }
-   ],
+  ],
   "requirements": [
     {
       "name": "puppet",
