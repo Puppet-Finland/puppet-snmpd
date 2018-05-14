@@ -8,9 +8,9 @@
 #   Whether to manage snmpd with Puppet or not. Valid values are true (default) 
 #   and false.
 # [*manage_packetfilter*]
-#   Manage packetfilter rules. Valid values are true and false (default).
+#   Manage packetfilter rules. Valid values are true (default) and false.
 # [*manage_monit*]
-#   Manage monit rules. Valid values are true and false (default).
+#   Manage monit rules. Valid values are true (default) and false.
 # [*iface*]
 #   The interface from which to allow connections. Currently only affects packet 
 #   filtering rules. Defaults to 'eth0' and can be omitted if packet filtering 
@@ -55,8 +55,8 @@
 class snmpd
 (
     Boolean         $manage = true,
-    Boolean         $manage_packetfilter = false,
-    Boolean         $manage_monit = false,
+    Boolean         $manage_packetfilter = true,
+    Boolean         $manage_monit = true,
                     $iface = 'eth0',
                     $community=undef,
     Optional[Hash]  $users = {},
