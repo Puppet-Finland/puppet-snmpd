@@ -5,14 +5,20 @@
 #
 class snmpd::packetfilter
 (
-    $iface,
-    $allow_address_ipv4,
-    $allow_netmask_ipv4,
-    $allow_address_ipv6,
-    $allow_netmask_ipv6
+    String           $allow_address_ipv4,
+    String           $allow_netmask_ipv4,
+    String           $allow_address_ipv6,
+    String           $allow_netmask_ipv6,
+    Optional[String] $iface = undef
 
 ) inherits snmpd::params
 {
+
+    # Use primary network interface unless told otherwise
+    $allow_iface = $iface ? {
+        undef   => $facts['networking']['primary'],
+        default => $iface,
+    }
 
     @firewall { '007 ipv4 accept snmp':
         provider => 'iptables',
@@ -21,7 +27,7 @@ class snmpd::packetfilter
         action   => 'accept',
         source   => "${allow_address_ipv4}/${allow_netmask_ipv4}",
         dport    => 161,
-        iniface  => $iface,
+        iniface  => $allow_iface,
         tag      => 'default',
     }
 
@@ -32,7 +38,7 @@ class snmpd::packetfilter
         action   => 'accept',
         source   => "${allow_address_ipv6}/${allow_netmask_ipv6}",
         dport    => 161,
-        iniface  => $iface,
+        iniface  => $allow_iface,
         tag      => 'default',
     }
 }

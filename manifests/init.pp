@@ -13,8 +13,7 @@
 #   Manage monit rules. Valid values are true (default) and false.
 # [*iface*]
 #   The interface from which to allow connections. Currently only affects packet 
-#   filtering rules. Defaults to 'eth0' and can be omitted if packet filtering 
-#   is not handled by snmpd::packetfilter class.
+#   filtering rules. Defaults to primary network interface as seen by facter.
 # [*community*]
 #   The community string to use (essentially a shared password). Leave empty if 
 #   you want to disable snmpv2.
@@ -57,7 +56,7 @@ class snmpd
     Boolean         $manage = true,
     Boolean         $manage_packetfilter = true,
     Boolean         $manage_monit = true,
-                    $iface = 'eth0',
+                    $iface = undef,
                     $community=undef,
     Optional[Hash]  $users = {},
                     $allow_address_ipv4='127.0.0.1',
