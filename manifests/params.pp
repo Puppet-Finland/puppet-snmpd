@@ -13,16 +13,15 @@ class snmpd::params {
             $config_name = '/etc/snmp/snmpd.conf'
             $dist_config_name = '/usr/share/snmp/snmpd.conf'
             $service_name = 'snmpd'
-            $pidfile = '/var/run/snmpd.pid'
+            $process_match = '^/usr/sbin/snmpd'
             $vardir = '/var/lib/net-snmp'
-
         }
         'Debian': {
             $package_name = 'snmpd'
             $config_name = '/etc/snmp/snmpd.conf'
             $dist_config_name = '/usr/share/snmp/snmpd.conf'
             $service_name = 'snmpd'
-            $pidfile = '/var/run/snmpd.pid'
+            $process_match = '^/usr/sbin/snmpd'
             $vardir = '/var/lib/snmp'
         }
         'FreeBSD': {
@@ -30,7 +29,7 @@ class snmpd::params {
             $config_name = '/usr/local/etc/snmpd.conf'
             $dist_config_name = '/usr/local/share/snmp/snmpd.conf'
             $service_name = 'snmpd'
-            $pidfile = '/var/run/net_snmpd.pid'
+            $process_match = '^/usr/local/sbin/snmpd'
             $vardir = '/var/net-snmp'
         }
         default: {
