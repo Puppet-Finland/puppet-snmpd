@@ -4,7 +4,10 @@
 #
 class snmpd::install inherits snmpd::params {
 
-    package { $::snmpd::params::package_name:
+  unless $facts['os']['family'] == 'Darwin' {
+
+  package { $::snmpd::params::package_name:
         ensure => installed,
     }
+  }
 }

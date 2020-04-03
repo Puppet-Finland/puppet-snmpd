@@ -32,6 +32,14 @@ class snmpd::params {
             $process_match = '^/usr/local/sbin/snmpd'
             $vardir = '/var/net-snmp'
         }
+        'Darwin': {
+            $package_name = 'snmpd'
+            $config_name = '/etc/snmp/snmpd.conf'
+            $dist_config_name = '/usr/share/snmp/snmpd.conf'
+            $service_name = 'org.net-snmp.snmpd'
+            $process_match = '^/usr/libexec/snmpd'
+            $vardir = '/var/db/net-snmp'
+        }
         default: {
             fail("Unsupported OS: ${::osfamily}")
         }

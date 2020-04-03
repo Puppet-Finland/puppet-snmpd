@@ -2,6 +2,8 @@
 
 Puppet module for configuring snmpd. Includes monit and iptables/ip6tables support.
 
+Currently monit and firewalling (pf) are not supported on Darwin.
+
 # Module usage
 
 Snmpv2 setup with IP limits:
