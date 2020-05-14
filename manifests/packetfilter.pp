@@ -16,7 +16,7 @@ class snmpd::packetfilter
 
     # Use primary network interface unless told otherwise
     $allow_iface = $iface ? {
-        undef   => $facts['networking']['primary'],
+        undef   => undef,
         default => $iface,
     }
 
