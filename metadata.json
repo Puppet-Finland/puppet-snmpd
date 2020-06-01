@@ -9,19 +9,19 @@
   "dependencies": [
     {
       "name": "puppetfinland/monit",
-      "version_requirement": ">= 0.5.0"
+      "version_requirement": ">= 0.5.0 < 1.0.0"
     },
     {
       "name": "puppetfinland/packetfilter",
-      "version_requirement": ">= 0.5.0"
+      "version_requirement": ">= 0.5.0 < 1.0.0"
     },
     {
       "name": "puppetfinland/os",
-      "version_requirement": ">= 0.5.6"
+      "version_requirement": ">= 0.5.6 < 1.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.0.0"
+      "version_requirement": ">= 4.0.0 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
