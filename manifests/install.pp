@@ -1,6 +1,5 @@
-# == Class: snmpd::install
 #
-# This class installs the snmpd daemon
+# @summary this class installs the snmpd daemon
 #
 class snmpd::install inherits snmpd::params {
 

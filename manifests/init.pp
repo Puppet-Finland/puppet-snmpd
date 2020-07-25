@@ -1,55 +1,55 @@
 # == Class: snmpd
 #
-# This class install and configures the snmpd daemon
+# @summary install and configure the snmpd daemon
 #
-# == Parameters
-#
-# [*manage*]
+# @param manage
 #   Whether to manage snmpd with Puppet or not. Valid values are true (default) 
 #   and false.
-# [*manage_packetfilter*]
+#
+# @param manage_packetfilter
 #   Manage packetfilter rules. Valid values are true (default) and false.
-# [*manage_monit*]
+#
+# @param manage_monit
 #   Manage monit rules. Valid values are true (default) and false.
-# [*iface*]
+#
+# @param iface
 #   The interface from which to allow connections. Currently only affects packet 
 #   filtering rules. Defaults to primary network interface as seen by facter.
-# [*community*]
+#
+# @param community
 #   The community string to use (essentially a shared password). Leave empty if 
 #   you want to disable snmpv2.
-# [*users*]
+#
+# @param users
 #   A hash of snmpd::user resources. Leave empty to disable snmpv3 users 
 #   altogether, or to manage them directly using snmpd::user or outside this 
 #   class. By default no users are created.
-# [*allow_address_ipv4*]
+#
+# @param allow_address_ipv4
 #   IPv4 address from where to allow connections. Affects both packet filtering 
 #   rules and snmpd's internal filters. Address part only.
-# [*allow_netmask_ipv4*]
+#
+# @param allow_netmask_ipv4
 #   IPv4 network from where to allow connections. Netmask part only.
-# [*allow_address_ipv6*]
+#
+# @param allow_address_ipv6
 #   IPv6 address from where to allow connections. Affects both packet filtering 
 #   rules and snmpd's internal filters. Address part only.
-# [*allow_netmask_ipv6*]
+#
+# @param allow_netmask_ipv6
 #   IPv6 network from where to allow connections. Netmask part only.
-# [*min_diskspace*]
+#
+# @param min_diskspace
 #   Minimum amount of diskspace. Passed directly to snmpd.conf "includeAllDisks" 
 #   option as a parameter.
-# [*max_load*]
+#
+# @param max_load
 #   Maximum 1, 5 and 15-minute load averages. Passed directly to snmpd.conf 
 #   "load" option as a parameter.
-# [*monitor_email*]
+#
+# @param monitor_email
 #   Server monitoring email. Also doubles as sysContact. Defaults to
 #   $::servermonitor.
-#
-# == Authors
-#
-# Samuli Seppänen <samuli.seppanen@gmail.com>
-#
-# Samuli Seppänen <samuli@openvpn.net>
-#
-# == License
-#
-# BSD-license. See file LICENSE for details.
 #
 class snmpd
 (

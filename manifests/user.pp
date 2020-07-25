@@ -1,19 +1,16 @@
 #
-# == Define: snmpd::user
+# @summary add an snmpv3 user.
+#   This define does the same things net-snmp-config would do when creating a 
+#   user. The assumption is that only authenticated snmpv3 users will be allowed 
+#   to access the information from snmpd.
 #
-# Define an snmpv3 user.
-#
-# This define does the same things net-snmp-config would do when creating a 
-# user. The assumption is that only authenticated snmpv3 users will be allowed 
-# to access the information from snmpd.
-#
-# = Parameters
-#
-# [*title*]
+# @param title
 #   While not strictly a parameter, the resource $title is used as the username.
-# [*pass*]
+#
+# @param pass
 #   Password for the user.
-# [*rw*]
+#
+# @param rw
 #   Grant user SNMP write access. Valid values 'yes' and 'no'. Defaults to 'no'.
 #
 define snmpd::user
@@ -38,7 +35,7 @@ define snmpd::user
     # net-snmp-config because it cannot force encryption on users (e.g. rouser 
     # john priv).
     exec { "snmpd-create-user-${title}":
-        command => "${::snmpd::params::service_stop}; sleep 3; echo \"${createuser_line}\" >> ${::snmpd::params::vardir}/snmpd.conf; ${::snmpd::params::service_start}",
+        command => "${::snmpd::params::service_stop}; sleep 3; echo \"${createuser_line}\" >> ${::snmpd::params::vardir}/snmpd.conf; ${::snmpd::params::service_start}", # lint:ignore:140chars
         unless  => $unless_cmd,
         user    => root,
         path    => ['/bin', '/sbin', '/usr/bin', '/usr/sbin', '/usr/local/bin', '/usr/local/sbin'],

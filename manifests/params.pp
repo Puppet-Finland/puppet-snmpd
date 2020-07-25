@@ -1,7 +1,5 @@
 #
-# == Class: snmpd::params
-#
-# Defines some variables based on the operating system
+# @summary define some variables based on the operating system
 #
 class snmpd::params {
 

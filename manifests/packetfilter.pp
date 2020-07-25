@@ -1,7 +1,7 @@
-# == Class: snmpd::packetfilter
 #
-# This class configures packetfilter to only let in traffic from specified 
-# IP-addresses to the snmpd daemon
+# @summary
+#   Configure packetfilter to only let in traffic from
+#   specified IP-addresses to the snmpd daemon
 #
 class snmpd::packetfilter
 (

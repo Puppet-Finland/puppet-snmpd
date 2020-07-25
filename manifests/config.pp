@@ -1,7 +1,5 @@
 #
-# Class: snmpd::configuration
-#
-# Setup snmpd.conf
+# @summary setup snmpd.conf
 #
 class snmpd::config
 (

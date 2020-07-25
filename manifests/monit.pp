@@ -1,7 +1,5 @@
 #
-# == Class: snmpd::monit
-#
-# Sets up monit rules for snmpd
+# @summary setup monit rules for snmpd
 #
 class snmpd::monit
 (

@@ -1,6 +1,5 @@
-# == Class: snmpd::service
 #
-# This class configures the snmpd service
+# @summary configure the snmpd service
 #
 class snmpd::service inherits snmpd::params {
 

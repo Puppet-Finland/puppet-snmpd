@@ -1,7 +1,5 @@
 #
-# == Class: snmpd::config::freebsd
-#
-# FreeBSD-specific snmpd configurations
+# @summary FreeBSD-specific snmpd configurations
 #
 class snmpd::config::freebsd inherits snmpd::params {
 
