@@ -3,6 +3,7 @@
 #
 class snmpd::monit
 (
+    $puppet_headers,
     $monitor_email
 
 ) inherits snmpd::params

@@ -1,4 +1,4 @@
-### THIS FILE IS MANAGED BY PUPPET. ANY MANUAL CHANGES WILL GET OVERWRITTEN.
+<% if scope['::snmpd::monit::puppet_headers'] %>### THIS FILE IS MANAGED BY PUPPET. ANY MANUAL CHANGES WILL GET OVERWRITTEN.<% end %>
 
 check process snmpd matching "<%= scope['::snmpd::params::process_match'] %>"
    start program = "<%= scope['::snmpd::params::service_start'] %>"

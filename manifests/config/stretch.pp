@@ -2,7 +2,11 @@
 # @summary ensure that snmpd creates a pidfile
 #   this is not the case by default on Debian 9 ("stretch").
 #
-class snmpd::config::stretch inherits snmpd::params {
+class snmpd::config::stretch
+(
+    $puppet_headers,
+)
+inherits snmpd::params {
     ::systemd::dropin_file { 'snmpd':
         ensure   => 'present',
         unit     => "${::snmpd::params::service_name}.service",

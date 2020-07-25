@@ -3,6 +3,7 @@
 #
 class snmpd::config
 (
+    $puppet_headers,
     $community,
     $allow_address_ipv4,
     $allow_netmask_ipv4,
@@ -53,7 +54,9 @@ class snmpd::config
     # derivatives.
     if $facts['os']['family'] == 'Debian' {
         if $facts['os']['distro']['codename'] == 'stretch' {
-            include ::snmpd::config::stretch
+            class { '::snmpd::config::stretch':
+                puppet_headers => $puppet_headers,
+            }
         }
     }
 }
