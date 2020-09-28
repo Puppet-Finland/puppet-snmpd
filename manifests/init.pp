@@ -50,6 +50,9 @@
 #   Maximum 1, 5 and 15-minute load averages. Passed directly to snmpd.conf 
 #   "load" option as a parameter.
 #
+# @param dont_log_tcp_wrapper_connects
+#   only log messages for denied connections, not for the accepted ones
+#
 # @param monitor_email
 #   Server monitoring email. Also doubles as sysContact. Defaults to
 #   $::servermonitor.
@@ -69,6 +72,7 @@ class snmpd
                     $allow_netmask_ipv6='128',
                     $min_diskspace='300000',
                     $max_load='12 10 5',
+            Boolean $dont_log_tcp_wrapper_connects = false,
                     $monitor_email = $::servermonitor
 
 ) inherits snmpd::params
@@ -79,15 +83,16 @@ if $manage {
     include ::snmpd::install
 
     class { '::snmpd::config':
-        puppet_headers     => $puppet_headers,
-        community          => $community,
-        allow_address_ipv4 => $allow_address_ipv4,
-        allow_netmask_ipv4 => $allow_netmask_ipv4,
-        allow_address_ipv6 => $allow_address_ipv6,
-        allow_netmask_ipv6 => $allow_netmask_ipv6,
-        min_diskspace      => $min_diskspace,
-        max_load           => $max_load,
-        email              => $monitor_email,
+        puppet_headers                => $puppet_headers,
+        community                     => $community,
+        allow_address_ipv4            => $allow_address_ipv4,
+        allow_netmask_ipv4            => $allow_netmask_ipv4,
+        allow_address_ipv6            => $allow_address_ipv6,
+        allow_netmask_ipv6            => $allow_netmask_ipv6,
+        min_diskspace                 => $min_diskspace,
+        max_load                      => $max_load,
+        dont_log_tcp_wrapper_connects => $dont_log_tcp_wrapper_connects,
+        email                         => $monitor_email,
     }
 
     if $::operatingsystem == 'FreeBSD' {

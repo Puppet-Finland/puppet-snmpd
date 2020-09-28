@@ -11,6 +11,7 @@ class snmpd::config
     $allow_netmask_ipv6,
     $min_diskspace,
     $max_load,
+    $dont_log_tcp_wrapper_connects,
     $email
 
 ) inherits snmpd::params
@@ -25,6 +26,12 @@ class snmpd::config
         $rocommunity_line_localhost = undef
         $rocommunity_line_ipv4 = undef
         $rocommunity_line_ipv6 = undef
+    }
+
+    if $dont_log_tcp_wrapper_connects {
+      $dont_log_tcp_wrapper_connects_line = 'dontLogTCPWrappersConnects yes'
+    } else {
+      $dont_log_tcp_wrapper_connects_line = undef
     }
 
     file { 'snmpd-snmpd.conf':
