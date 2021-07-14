@@ -170,6 +170,9 @@ iquerySecName   internalUser
  extend    test1   /bin/echo  Hello, world!
  extend-sh test2   echo Hello, world! ; echo Hi there ; exit 35
 #extend-sh test3   /bin/sh /tmp/shtest
+<% @progs_pass.each_pair do |oid, prog| -%>
+ pass <%= oid %> <%= prog %>
+<% end -%>
 
 #  Note that this last entry requires the script '/tmp/shtest' to be created first,
 #    containing the same three shell commands, before the line is uncommented
