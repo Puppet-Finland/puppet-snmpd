@@ -12,7 +12,6 @@ class snmpd::config
     $min_diskspace,
     $max_load,
     $dont_log_tcp_wrapper_connects,
-    Optional[Hash[String, String]] $progs_pass,
     $email
 
 ) inherits snmpd::params
@@ -33,6 +32,11 @@ class snmpd::config
       $dont_log_tcp_wrapper_connects_line = 'dontLogTCPWrappersConnects yes'
     } else {
       $dont_log_tcp_wrapper_connects_line = undef
+    }
+
+    $pass_progs = $::snmpd_pass_progs ? {
+      undef   => undef,
+      default => $::snmpd_pass_progs,
     }
 
     file { 'snmpd-snmpd.conf':

@@ -56,12 +56,6 @@
 # @param monitor_email
 #   Server monitoring email. Also doubles as sysContact. Defaults to
 #   $::servermonitor.
-# @param progs_pass
-#   Hash containing mapping of OIDs to program script names. Passed directly as
-#   "pass" entries in snmpd.conf. With this custom scripts can return
-#   data-typed (e.g. string, gauge) metrics instead of producing just strings
-#   values like "extend" would do. See snmpd.conf man page for more details on
-#   how the program/script should work.
 #
 class snmpd
 (
@@ -72,7 +66,6 @@ class snmpd
                     $iface = undef,
                     $community = undef,
     Optional[Hash]  $users = {},
-                    $progs_pass = undef,
                     $allow_address_ipv4='127.0.0.1',
                     $allow_netmask_ipv4='32',
                     $allow_address_ipv6='::1',
@@ -100,7 +93,6 @@ if $manage {
         max_load                      => $max_load,
         dont_log_tcp_wrapper_connects => $dont_log_tcp_wrapper_connects,
         email                         => $monitor_email,
-        progs_pass                    => $progs_pass
     }
 
     if $::operatingsystem == 'FreeBSD' {

@@ -19,6 +19,10 @@ Facter.add('snmpd_pass_progs') do
       end
       output[oid] = path
     end
-    output
+    if output.empty?
+      nil
+    else
+      output
+    end
   end
 end
