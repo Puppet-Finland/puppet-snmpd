@@ -12,7 +12,8 @@ class snmpd::config
     $min_diskspace,
     $max_load,
     $dont_log_tcp_wrapper_connects,
-    $email
+    $email,
+    Optional[Array[String]] $extra_lines
 
 ) inherits snmpd::params
 {

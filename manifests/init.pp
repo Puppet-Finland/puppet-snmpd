@@ -73,7 +73,8 @@ class snmpd
                     $min_diskspace='300000',
                     $max_load='12 10 5',
     Boolean         $dont_log_tcp_wrapper_connects = false,
-                    $monitor_email = $::servermonitor
+                    $monitor_email = $::servermonitor,
+                    $extra_lines = undef
 
 ) inherits snmpd::params
 {
@@ -93,6 +94,7 @@ if $manage {
         max_load                      => $max_load,
         dont_log_tcp_wrapper_connects => $dont_log_tcp_wrapper_connects,
         email                         => $monitor_email,
+        extra_lines                   => $extra_lines,
     }
 
     if $::operatingsystem == 'FreeBSD' {

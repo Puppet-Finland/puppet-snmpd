@@ -176,6 +176,12 @@ iquerySecName   internalUser
 <% end -%>
 <% end -%>
 
+<% if @extra_lines -%>
+<% @extra_lines.each do |line| -%>
+<%= line %>
+<% end -%>
+<% end -%>
+
 #  Note that this last entry requires the script '/tmp/shtest' to be created first,
 #    containing the same three shell commands, before the line is uncommented
 
